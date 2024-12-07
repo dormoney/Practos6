@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3020d212d5a54251a43e80d29a091106" Name="Diagram1">
+        <EntityTypeShape EntityType="Practos6Model.Artists" Width="1.5" PointX="3.75" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.Audience" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.Genres" Width="1.5" PointX="1.5" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.LoyaltyPrograms" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.PaymentMethods" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.Plays" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.PurchaseHistory" Width="1.5" PointX="3" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.ShowSchedule" Width="1.5" PointX="6" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.SostavArtists" Width="1.5" PointX="6" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.Tickets" Width="1.5" PointX="6" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Practos6Model.TicketTypes" Width="1.5" PointX="3.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="Practos6Model.FK__PlayArtis__Artis__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__LoyaltyPr__Audie__59FA5E80" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__PurchaseH__Audie__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__Tickets__Audienc__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__Plays__GenreID__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__PlayArtis__PlayI__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__ShowSched__PlayI__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__Tickets__PlayID__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__PurchaseH__Ticke__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="Practos6Model.FK__Tickets__TicketT__52593CB8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

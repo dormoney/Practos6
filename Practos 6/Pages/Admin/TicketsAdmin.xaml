@@ -1,0 +1,41 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practos_6.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="Practos_6.Pages.TicketsAdmin"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="TicketsAdmin">
+
+    <Grid Background="#FFFFD0D0">
+
+        <ui:Button x:Name="tickAdd" Content="Добавить билет" Margin="349,341,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift SemiBold" BorderBrush="#FFE80000" Foreground="White" Background="#FF920000" HorizontalAlignment="Left" BorderThickness="3,3,3,3" Padding="10,5,10,5" Click="tickAdd_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="BorderThickness" Value="9"/>
+                </Style>
+            </Button.Resources>
+        </ui:Button>
+        <ui:ListView x:Name="TypesList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="785,224,122,224" FontSize="24" BorderBrush="#FF920000" Foreground="Black" MouseDoubleClick="TypesList_MouseDoubleClick">
+            <ui:ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Номер Типа" DisplayMemberBinding="{Binding TicketTypeID}" Width="150"/>
+                    <GridViewColumn Header="Название типа" DisplayMemberBinding="{Binding TypeName}" Width="500"/>
+                    <GridViewColumn Header="Цена" DisplayMemberBinding="{Binding Price}" Width="353"/>
+                </GridView>
+            </ui:ListView.View>
+        </ui:ListView>
+        <ui:Button x:Name="Upd" Content="Обновить список" Margin="341,422,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift SemiBold" BorderBrush="#FFE80000" Foreground="White" Background="#FF920000" HorizontalAlignment="Left" BorderThickness="3,3,3,3" Padding="10,5,10,5" Click="Upd_Click">
+            <ui:Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="BorderThickness" Value="9"/>
+                </Style>
+            </ui:Button.Resources>
+        </ui:Button>
+
+    </Grid>
+</Page>

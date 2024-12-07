@@ -1,0 +1,784 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Practos6Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="255" />
+          <Property Name="Biography" Type="text" />
+        </EntityType>
+        <EntityType Name="Audience">
+          <Key>
+            <PropertyRef Name="AudienceID" />
+          </Key>
+          <Property Name="AudienceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" />
+          <Property Name="DateOfBirth" Type="date" />
+          <Property Name="RegistrationDate" Type="datetime" />
+          <Property Name="Role" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenreName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoyaltyPrograms">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AudienceID" Type="int" />
+          <Property Name="DiscountPercentage" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="BonusPoints" Type="int" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="PaymentMethodID" />
+          </Key>
+          <Property Name="PaymentMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MethodName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Plays">
+          <Key>
+            <PropertyRef Name="PlayID" />
+          </Key>
+          <Property Name="PlayID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Description" Type="text" />
+          <Property Name="Duration" Type="int" />
+          <Property Name="Director" Type="varchar" MaxLength="100" />
+          <Property Name="GenreID" Type="int" />
+          <Property Name="KolichMest" Type="int" />
+        </EntityType>
+        <EntityType Name="PurchaseHistory">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AudienceID" Type="int" />
+          <Property Name="TicketID" Type="int" />
+          <Property Name="PurchaseDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ShowSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayID" Type="int" />
+          <Property Name="ShowDate" Type="datetime" Nullable="false" />
+          <Property Name="SeatAvailability" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="SostavArtists">
+          <Key>
+            <PropertyRef Name="Id_sostava" />
+          </Key>
+          <Property Name="Id_sostava" Type="int" Nullable="false" />
+          <Property Name="PlayID" Type="int" />
+          <Property Name="ArtistID" Type="int" />
+          <Property Name="Cost" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayID" Type="int" />
+          <Property Name="AudienceID" Type="int" />
+          <Property Name="SeatNumber" Type="varchar" MaxLength="10" />
+          <Property Name="PurchaseDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="TicketTypeID" Type="int" />
+        </EntityType>
+        <EntityType Name="TicketTypes">
+          <Key>
+            <PropertyRef Name="TicketTypeID" />
+          </Key>
+          <Property Name="TicketTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__LoyaltyPr__Audie__59FA5E80">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoyaltyPrograms" Type="Self.LoyaltyPrograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="LoyaltyPrograms">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayArtis__Artis__3F466844">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SostavArtists" Type="Self.SostavArtists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="SostavArtists">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayArtis__PlayI__3E52440B">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1" />
+          <End Role="SostavArtists" Type="Self.SostavArtists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="SostavArtists">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plays__GenreID__3B75D760">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Plays" Type="Self.Plays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Plays">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseH__Audie__5629CD9C">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseHistory" Type="Self.PurchaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="PurchaseHistory">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseH__Ticke__571DF1D5">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseHistory" Type="Self.PurchaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="PurchaseHistory">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShowSched__PlayI__4222D4EF">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShowSchedule" Type="Self.ShowSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="ShowSchedule">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__Audienc__5165187F">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__PlayID__5070F446">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__TicketT__52593CB8">
+          <End Role="TicketTypes" Type="Self.TicketTypes" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketTypes">
+              <PropertyRef Name="TicketTypeID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="TicketTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Practos6ModelContainer">
+          <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Audience" EntityType="Self.Audience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoyaltyPrograms" EntityType="Self.LoyaltyPrograms" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Plays" EntityType="Self.Plays" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PurchaseHistory" EntityType="Self.PurchaseHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShowSchedule" EntityType="Self.ShowSchedule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SostavArtists" EntityType="Self.SostavArtists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TicketTypes" EntityType="Self.TicketTypes" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__LoyaltyPr__Audie__59FA5E80" Association="Self.FK__LoyaltyPr__Audie__59FA5E80">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="LoyaltyPrograms" EntitySet="LoyaltyPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayArtis__Artis__3F466844" Association="Self.FK__PlayArtis__Artis__3F466844">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="SostavArtists" EntitySet="SostavArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayArtis__PlayI__3E52440B" Association="Self.FK__PlayArtis__PlayI__3E52440B">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="SostavArtists" EntitySet="SostavArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plays__GenreID__3B75D760" Association="Self.FK__Plays__GenreID__3B75D760">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Plays" EntitySet="Plays" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseH__Audie__5629CD9C" Association="Self.FK__PurchaseH__Audie__5629CD9C">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="PurchaseHistory" EntitySet="PurchaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseH__Ticke__571DF1D5" Association="Self.FK__PurchaseH__Ticke__571DF1D5">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="PurchaseHistory" EntitySet="PurchaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShowSched__PlayI__4222D4EF" Association="Self.FK__ShowSched__PlayI__4222D4EF">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="ShowSchedule" EntitySet="ShowSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__Audienc__5165187F" Association="Self.FK__Tickets__Audienc__5165187F">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__PlayID__5070F446" Association="Self.FK__Tickets__PlayID__5070F446">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__TicketT__52593CB8" Association="Self.FK__Tickets__TicketT__52593CB8">
+            <End Role="TicketTypes" EntitySet="TicketTypes" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Practos6Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="ArtistID" />
+          </Key>
+          <Property Name="ArtistID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SostavArtists" Relationship="Self.FK__PlayArtis__Artis__3F466844" FromRole="Artists" ToRole="SostavArtists" />
+        </EntityType>
+        <EntityType Name="Audience">
+          <Key>
+            <PropertyRef Name="AudienceID" />
+          </Key>
+          <Property Name="AudienceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="0" />
+          <Property Name="RegistrationDate" Type="DateTime" Precision="3" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="LoyaltyPrograms" Relationship="Self.FK__LoyaltyPr__Audie__59FA5E80" FromRole="Audience" ToRole="LoyaltyPrograms" />
+          <NavigationProperty Name="PurchaseHistory" Relationship="Self.FK__PurchaseH__Audie__5629CD9C" FromRole="Audience" ToRole="PurchaseHistory" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK__Tickets__Audienc__5165187F" FromRole="Audience" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="Genres">
+          <Key>
+            <PropertyRef Name="GenreID" />
+          </Key>
+          <Property Name="GenreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenreName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Plays" Relationship="Self.FK__Plays__GenreID__3B75D760" FromRole="Genres" ToRole="Plays" />
+        </EntityType>
+        <EntityType Name="LoyaltyPrograms">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AudienceID" Type="Int32" />
+          <Property Name="DiscountPercentage" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="BonusPoints" Type="Int32" />
+          <NavigationProperty Name="Audience" Relationship="Self.FK__LoyaltyPr__Audie__59FA5E80" FromRole="LoyaltyPrograms" ToRole="Audience" />
+        </EntityType>
+        <EntityType Name="PaymentMethods">
+          <Key>
+            <PropertyRef Name="PaymentMethodID" />
+          </Key>
+          <Property Name="PaymentMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Plays">
+          <Key>
+            <PropertyRef Name="PlayID" />
+          </Key>
+          <Property Name="PlayID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Duration" Type="Int32" />
+          <Property Name="Director" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="GenreID" Type="Int32" />
+          <Property Name="KolichMest" Type="Int32" />
+          <NavigationProperty Name="Genres" Relationship="Self.FK__Plays__GenreID__3B75D760" FromRole="Plays" ToRole="Genres" />
+          <NavigationProperty Name="SostavArtists" Relationship="Self.FK__PlayArtis__PlayI__3E52440B" FromRole="Plays" ToRole="SostavArtists" />
+          <NavigationProperty Name="ShowSchedule" Relationship="Self.FK__ShowSched__PlayI__4222D4EF" FromRole="Plays" ToRole="ShowSchedule" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK__Tickets__PlayID__5070F446" FromRole="Plays" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="PurchaseHistory">
+          <Key>
+            <PropertyRef Name="PurchaseID" />
+          </Key>
+          <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AudienceID" Type="Int32" />
+          <Property Name="TicketID" Type="Int32" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Audience" Relationship="Self.FK__PurchaseH__Audie__5629CD9C" FromRole="PurchaseHistory" ToRole="Audience" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK__PurchaseH__Ticke__571DF1D5" FromRole="PurchaseHistory" ToRole="Tickets" />
+        </EntityType>
+        <EntityType Name="ShowSchedule">
+          <Key>
+            <PropertyRef Name="ScheduleID" />
+          </Key>
+          <Property Name="ScheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayID" Type="Int32" />
+          <Property Name="ShowDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SeatAvailability" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Plays" Relationship="Self.FK__ShowSched__PlayI__4222D4EF" FromRole="ShowSchedule" ToRole="Plays" />
+        </EntityType>
+        <EntityType Name="SostavArtists">
+          <Key>
+            <PropertyRef Name="Id_sostava" />
+          </Key>
+          <Property Name="Id_sostava" Type="Int32" Nullable="false" />
+          <Property Name="PlayID" Type="Int32" />
+          <Property Name="ArtistID" Type="Int32" />
+          <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Artists" Relationship="Self.FK__PlayArtis__Artis__3F466844" FromRole="SostavArtists" ToRole="Artists" />
+          <NavigationProperty Name="Plays" Relationship="Self.FK__PlayArtis__PlayI__3E52440B" FromRole="SostavArtists" ToRole="Plays" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Tickets">
+          <Key>
+            <PropertyRef Name="TicketID" />
+          </Key>
+          <Property Name="TicketID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayID" Type="Int32" />
+          <Property Name="AudienceID" Type="Int32" />
+          <Property Name="SeatNumber" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PurchaseDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TicketTypeID" Type="Int32" />
+          <NavigationProperty Name="Audience" Relationship="Self.FK__Tickets__Audienc__5165187F" FromRole="Tickets" ToRole="Audience" />
+          <NavigationProperty Name="Plays" Relationship="Self.FK__Tickets__PlayID__5070F446" FromRole="Tickets" ToRole="Plays" />
+          <NavigationProperty Name="PurchaseHistory" Relationship="Self.FK__PurchaseH__Ticke__571DF1D5" FromRole="Tickets" ToRole="PurchaseHistory" />
+          <NavigationProperty Name="TicketTypes" Relationship="Self.FK__Tickets__TicketT__52593CB8" FromRole="Tickets" ToRole="TicketTypes" />
+        </EntityType>
+        <EntityType Name="TicketTypes">
+          <Key>
+            <PropertyRef Name="TicketTypeID" />
+          </Key>
+          <Property Name="TicketTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Tickets" Relationship="Self.FK__Tickets__TicketT__52593CB8" FromRole="TicketTypes" ToRole="Tickets" />
+        </EntityType>
+        <Association Name="FK__PlayArtis__Artis__3F466844">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="SostavArtists" Type="Self.SostavArtists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="ArtistID" />
+            </Principal>
+            <Dependent Role="SostavArtists">
+              <PropertyRef Name="ArtistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__LoyaltyPr__Audie__59FA5E80">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="LoyaltyPrograms" Type="Self.LoyaltyPrograms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="LoyaltyPrograms">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseH__Audie__5629CD9C">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseHistory" Type="Self.PurchaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="PurchaseHistory">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__Audienc__5165187F">
+          <End Role="Audience" Type="Self.Audience" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Audience">
+              <PropertyRef Name="AudienceID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="AudienceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Plays__GenreID__3B75D760">
+          <End Role="Genres" Type="Self.Genres" Multiplicity="0..1" />
+          <End Role="Plays" Type="Self.Plays" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genres">
+              <PropertyRef Name="GenreID" />
+            </Principal>
+            <Dependent Role="Plays">
+              <PropertyRef Name="GenreID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlayArtis__PlayI__3E52440B">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1" />
+          <End Role="SostavArtists" Type="Self.SostavArtists" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="SostavArtists">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ShowSched__PlayI__4222D4EF">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ShowSchedule" Type="Self.ShowSchedule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="ShowSchedule">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__PlayID__5070F446">
+          <End Role="Plays" Type="Self.Plays" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Plays">
+              <PropertyRef Name="PlayID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="PlayID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PurchaseH__Ticke__571DF1D5">
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="PurchaseHistory" Type="Self.PurchaseHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tickets">
+              <PropertyRef Name="TicketID" />
+            </Principal>
+            <Dependent Role="PurchaseHistory">
+              <PropertyRef Name="TicketID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Tickets__TicketT__52593CB8">
+          <End Role="TicketTypes" Type="Self.TicketTypes" Multiplicity="0..1" />
+          <End Role="Tickets" Type="Self.Tickets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TicketTypes">
+              <PropertyRef Name="TicketTypeID" />
+            </Principal>
+            <Dependent Role="Tickets">
+              <PropertyRef Name="TicketTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Practos6Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Artists" EntityType="Self.Artists" />
+          <EntitySet Name="Audience" EntityType="Self.Audience" />
+          <EntitySet Name="Genres" EntityType="Self.Genres" />
+          <EntitySet Name="LoyaltyPrograms" EntityType="Self.LoyaltyPrograms" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethods" />
+          <EntitySet Name="Plays" EntityType="Self.Plays" />
+          <EntitySet Name="PurchaseHistory" EntityType="Self.PurchaseHistory" />
+          <EntitySet Name="ShowSchedule" EntityType="Self.ShowSchedule" />
+          <EntitySet Name="SostavArtists" EntityType="Self.SostavArtists" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tickets" EntityType="Self.Tickets" />
+          <EntitySet Name="TicketTypes" EntityType="Self.TicketTypes" />
+          <AssociationSet Name="FK__PlayArtis__Artis__3F466844" Association="Self.FK__PlayArtis__Artis__3F466844">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="SostavArtists" EntitySet="SostavArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__LoyaltyPr__Audie__59FA5E80" Association="Self.FK__LoyaltyPr__Audie__59FA5E80">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="LoyaltyPrograms" EntitySet="LoyaltyPrograms" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseH__Audie__5629CD9C" Association="Self.FK__PurchaseH__Audie__5629CD9C">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="PurchaseHistory" EntitySet="PurchaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__Audienc__5165187F" Association="Self.FK__Tickets__Audienc__5165187F">
+            <End Role="Audience" EntitySet="Audience" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Plays__GenreID__3B75D760" Association="Self.FK__Plays__GenreID__3B75D760">
+            <End Role="Genres" EntitySet="Genres" />
+            <End Role="Plays" EntitySet="Plays" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlayArtis__PlayI__3E52440B" Association="Self.FK__PlayArtis__PlayI__3E52440B">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="SostavArtists" EntitySet="SostavArtists" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ShowSched__PlayI__4222D4EF" Association="Self.FK__ShowSched__PlayI__4222D4EF">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="ShowSchedule" EntitySet="ShowSchedule" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__PlayID__5070F446" Association="Self.FK__Tickets__PlayID__5070F446">
+            <End Role="Plays" EntitySet="Plays" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PurchaseH__Ticke__571DF1D5" Association="Self.FK__PurchaseH__Ticke__571DF1D5">
+            <End Role="Tickets" EntitySet="Tickets" />
+            <End Role="PurchaseHistory" EntitySet="PurchaseHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Tickets__TicketT__52593CB8" Association="Self.FK__Tickets__TicketT__52593CB8">
+            <End Role="TicketTypes" EntitySet="TicketTypes" />
+            <End Role="Tickets" EntitySet="Tickets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Practos6ModelContainer" CdmEntityContainer="Practos6Entities">
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="Practos6Model.Artists">
+              <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audience">
+            <EntityTypeMapping TypeName="Practos6Model.Audience">
+              <MappingFragment StoreEntitySet="Audience">
+                <ScalarProperty Name="AudienceID" ColumnName="AudienceID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="Practos6Model.Genres">
+              <MappingFragment StoreEntitySet="Genres">
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="GenreName" ColumnName="GenreName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoyaltyPrograms">
+            <EntityTypeMapping TypeName="Practos6Model.LoyaltyPrograms">
+              <MappingFragment StoreEntitySet="LoyaltyPrograms">
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="AudienceID" ColumnName="AudienceID" />
+                <ScalarProperty Name="DiscountPercentage" ColumnName="DiscountPercentage" />
+                <ScalarProperty Name="BonusPoints" ColumnName="BonusPoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="Practos6Model.PaymentMethods">
+              <MappingFragment StoreEntitySet="PaymentMethods">
+                <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
+                <ScalarProperty Name="MethodName" ColumnName="MethodName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Plays">
+            <EntityTypeMapping TypeName="Practos6Model.Plays">
+              <MappingFragment StoreEntitySet="Plays">
+                <ScalarProperty Name="PlayID" ColumnName="PlayID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Director" ColumnName="Director" />
+                <ScalarProperty Name="GenreID" ColumnName="GenreID" />
+                <ScalarProperty Name="KolichMest" ColumnName="KolichMest" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseHistory">
+            <EntityTypeMapping TypeName="Practos6Model.PurchaseHistory">
+              <MappingFragment StoreEntitySet="PurchaseHistory">
+                <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+                <ScalarProperty Name="AudienceID" ColumnName="AudienceID" />
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShowSchedule">
+            <EntityTypeMapping TypeName="Practos6Model.ShowSchedule">
+              <MappingFragment StoreEntitySet="ShowSchedule">
+                <ScalarProperty Name="ScheduleID" ColumnName="ScheduleID" />
+                <ScalarProperty Name="PlayID" ColumnName="PlayID" />
+                <ScalarProperty Name="ShowDate" ColumnName="ShowDate" />
+                <ScalarProperty Name="SeatAvailability" ColumnName="SeatAvailability" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SostavArtists">
+            <EntityTypeMapping TypeName="Practos6Model.SostavArtists">
+              <MappingFragment StoreEntitySet="SostavArtists">
+                <ScalarProperty Name="Id_sostava" ColumnName="Id_sostava" />
+                <ScalarProperty Name="PlayID" ColumnName="PlayID" />
+                <ScalarProperty Name="ArtistID" ColumnName="ArtistID" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Practos6Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tickets">
+            <EntityTypeMapping TypeName="Practos6Model.Tickets">
+              <MappingFragment StoreEntitySet="Tickets">
+                <ScalarProperty Name="TicketID" ColumnName="TicketID" />
+                <ScalarProperty Name="PlayID" ColumnName="PlayID" />
+                <ScalarProperty Name="AudienceID" ColumnName="AudienceID" />
+                <ScalarProperty Name="SeatNumber" ColumnName="SeatNumber" />
+                <ScalarProperty Name="PurchaseDate" ColumnName="PurchaseDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TicketTypeID" ColumnName="TicketTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TicketTypes">
+            <EntityTypeMapping TypeName="Practos6Model.TicketTypes">
+              <MappingFragment StoreEntitySet="TicketTypes">
+                <ScalarProperty Name="TicketTypeID" ColumnName="TicketTypeID" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,54 @@
+﻿<Page
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Practos_6.Pages.Tickets"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml" x:Class="Practos_6.Pages.Tickets.TickAddPage"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TickAddPage">
+
+    <Grid Background="#FFFFD0D0">
+        <ui:TextBox x:Name="txtNameTypeTick" HorizontalAlignment="Center" Margin="0,90,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="292" BorderThickness="0,0,0,1" Height="40" FontSize="20" Background="#FFFFD0D0" SelectionBrush="White" BorderBrush="#FF940000"/>
+        <ui:TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="28" VerticalAlignment="Top" Margin="0,50,0,0" Height="37">
+            <ui:TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ui:TextBlock.RenderTransform>
+            <Run Language="ru-ru" Text="Название типа билета"/>
+            <LineBreak/>
+            <Run Language="ru-ru"/>
+            <Run Text=" "/>
+        </ui:TextBlock>
+        <ui:TextBox x:Name="txtPriceTick" HorizontalAlignment="Center" Margin="0,175,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="292" BorderThickness="0,0,0,1" Height="40" FontSize="20" Background="#FFFFD0D0" SelectionBrush="White" BorderBrush="#FF940000"/>
+        <ui:TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" FontSize="28" VerticalAlignment="Top" Margin="0,135,0,0" Height="37">
+            <ui:TextBlock.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </ui:TextBlock.RenderTransform>
+            <Run Language="ru-ru" Text="Цена"/>
+            <Run Text=" билета"/>
+            <LineBreak/>
+            <Run/>
+            <Run Text=" "/>
+        </ui:TextBlock>
+        <ui:Button x:Name="tickAdd" Content="Добавить" Margin="0,266,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Bahnschrift SemiBold" BorderBrush="#FFE80000" Foreground="White" Background="#FF920000" HorizontalAlignment="Center" BorderThickness="3,3,3,3" Padding="10,5,10,5" Click="tickAdd_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                    <Setter Property="BorderThickness" Value="9"/>
+                </Style>
+            </Button.Resources>
+        </ui:Button>
+
+    </Grid>
+</Page>
